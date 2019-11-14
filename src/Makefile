@@ -1,7 +1,8 @@
 TARGET=svm
 CXX=clang++
 
-OBJ_FILES=main.o
+OBJ_FILES=arg.o machine.o object.o svm.o \
+		  main.o
 
 .PHONY: clean
 
