@@ -1,10 +1,14 @@
+#include <fstream>
 #include <iostream>
+#include <streambuf>
+#include <string>
+#include <vector>
 
 #include "svm.hpp"
 
-static Arguments argparse(std::vector<std::string> args)
+static svm::Arguments argparse(std::vector<std::string> args)
 {
-    Arguments defaults;
+    svm::Arguments defaults;
 
     if (args.size() < 2) {
         std::cerr << "Error: Invalid number of arguments" << std::endl;
@@ -12,7 +16,7 @@ static Arguments argparse(std::vector<std::string> args)
     }
 
     for (size_t i = 1; i < args.size(); i++) {
-        if (args[i] == SpecifierFin) {
+        if (args[i] == svm::SpecifierFin) {
             defaults.fin = args[++i];
         }
         else {
@@ -23,11 +27,20 @@ static Arguments argparse(std::vector<std::string> args)
     return defaults;
 }
 
+static void run(svm::Arguments& defaults)
+{
+    std::ifstream fs(defaults.fin);
+    std::string program((std::istreambuf_iterator<char>(fs)),
+                         std::istreambuf_iterator<char>());
+    svm::Machine vm{program};
+    vm.run();
+}
+
 int main(int argc, char **argv)
 {
-    Arguments defaults = argparse(std::vector<std::string>(argv, argv + argc));
+    svm::Arguments defaults = argparse(std::vector<std::string>(argv, argv + argc));
 
-    svm(defaults);
+    run(defaults);
 
     return 0;
 }

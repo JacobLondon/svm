@@ -2,10 +2,9 @@
 
 #include <stack>
 
-#include "object.hpp"
+#include "types/types.hpp"
 
-using iptr_t = char *;
-using instruction = iptr_t (*)(iptr_t, std::stack<Object>&);
+namespace svm {
 
 #define OPCODE_COUNT 256
 
@@ -14,10 +13,12 @@ public:
     iptr_t ip;
     instruction opcodes[OPCODE_COUNT];
     std::string program;
-    std::stack<Object> data;
+    stack_t data;
 
     Machine(std::string& program);
     ~Machine();
 
     void run();
 };
+
+} // svm

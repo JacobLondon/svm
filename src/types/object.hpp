@@ -2,6 +2,8 @@
 
 #include <cstdint>
 
+namespace svm {
+
 struct Object {
     union {
         uint8_t  u8;
@@ -15,3 +17,5 @@ struct Object {
     Object(uint8_t type);
     ~Object();
 };
+
+} // svm
