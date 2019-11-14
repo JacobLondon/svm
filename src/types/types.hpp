@@ -7,11 +7,15 @@
 namespace svm {
 
 enum type {
-    u8 = 'c',
+    i8,
+    u8,
+    i32,
+    u32,
+    voidptr,
 };
 
 using iptr_t = char *;
 using stack_t  = std::stack<Object>;
-using instruction = iptr_t (*)(iptr_t, stack_t&);
+using instruction_t = iptr_t (*)(iptr_t, stack_t&);
 
 } // svm

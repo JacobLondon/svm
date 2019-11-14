@@ -2,7 +2,6 @@
 #include <stack>
 
 #include "machine.hpp"
-#include "opcode.hpp"
 
 namespace svm {
 
@@ -14,7 +13,6 @@ Machine::Machine(std::string& program)
         opcodes[i] = op_nop;
     opcodes[op::push] = op_push_u8;
     opcodes[op::emit] = op_emit;
-    opcodes[op::newline] = op_newline;
 
     // starting instruction
     ip = (iptr_t)this->program.c_str();
